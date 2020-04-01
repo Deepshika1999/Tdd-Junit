@@ -1,0 +1,82 @@
+package com.epam.tddjunit;
+
+public class DeletecharA {
+
+	public String delete(String string) {
+		String r=string;
+		if(r.length()>=2)
+		{
+				if(r.charAt(0)=='A')
+				{
+					if(r.charAt(1)!='A')
+						r=string.substring(1,r.length());
+					else
+						r=string.substring(2,r.length());
+				}
+				else
+				{
+					if(r.charAt(1)=='A')
+						r=string.charAt(0)+string.substring(2,r.length());
+					else
+						r=string;
+				}
+			
+		}
+		return r;
+	}
+
+}
+
+package com.epam.tddjunit;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class DeletingcharTest {
+
+	/*
+	 * 1.2 chars AB=>B
+	 * 2.4 Chars AABC =>BC
+	 * 3. 4 char BCDA=>BCDA
+	 * 5. 1 char A=>""
+	 * 6.no chars ""=>""
+	 */
+	DeletecharA obj;
+	
+	@BeforeEach
+	void setup()
+	{
+		obj=new DeletecharA();
+	}
+	@Test
+	void test2chars() {
+		assertEquals("B",obj.delete("AB"));
+	}
+	@Test
+	void test4chars()
+	{
+		assertEquals("BD",obj.delete("AABD"));
+	}
+	@Test
+	void testNchars()
+	{
+		assertEquals("SBNHT",obj.delete("SABNHT"));
+	}
+	@Test
+	void test1char()
+	{
+		assertEquals("B",obj.delete("B"));
+	}
+	@Test
+	void testemptychar() {
+		assertEquals(" ",obj.delete(" "));
+	}
+	@Test
+	void testNchar1()
+	{
+		assertEquals("DMCKLA",obj.delete("DMCKLA"));
+	}
+
+}
